@@ -1,47 +1,81 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <div class="container">
+        <div class="buttons-group">
+            <button
+                type="button"
+                :class="{
+                    active: currentTab === 'home'
+                }"
+                @click="tabChangeHandler('home')"
+            >Home</button>
+            <button
+                type="button"
+                :class="{
+                    active: currentTab === 'products'
+                }"
+                @click="tabChangeHandler('products')"
+            >Projects</button>
+            <button
+                type="button"
+                :class="{
+                    active: currentTab === 'services'
+                }"
+                @click="tabChangeHandler('services')"
+            >Services</button>
+            <button
+                type="button"
+                :class="{
+                    active: currentTab === 'contact'
+                }"
+                @click="tabChangeHandler('contact')"
+            >Contact</button>
+        </div>
+        <div class="content">
+            <p>You chose <span class="highlight">{{currentTab}}</span></p>
+        </div>
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<script setup>
+import { ref } from 'vue';
+const currentTab = ref('home');
+
+const tabChangeHandler = (tabName) => {
+    currentTab.value = tabName;
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+</script>
+<style>
+.buttons-group {
+    margin-bottom: 10px;
 }
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+button {
+    display: inline-block;
+    padding: 18px 30px;
+    color: #fff !important;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none !important;
+    line-height: 1;
+    text-transform: uppercase;
+    background-color: transparent;
+    -webkit-transition: background-color 0.25s;
+    -moz-transition: background-color 0.25s;
+    transition: background-color 0.25s;
+    background: #389dc1;
+}
+button.active {
+    background-color: #e35885
+}
+.content {
+    text-align: center;
+}
+.highlight {
+    color: #ffffff;
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #c4d7e0;
+    border-radius: 2px;
+    text-transform: uppercase;
+    font-size: 18px;
 }
 </style>
